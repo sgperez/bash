@@ -1,0 +1,28 @@
+#!/bin/bash
+
+#Creates script files
+#Author: Sebastian Perez
+
+if [[ $1 ]]; then
+  bindir="${HOME}/bin"
+  scriptname="$1"
+  filename="${bindir}/${scriptname}"
+  if [[ -e $filename ]]; then
+    echo "Filename ${filename} already exists"
+    exit 1
+  fi
+
+  if [[ ! -d $bindir ]]; then
+    #directory does not exists
+    if mkdir "$bindir"; then
+      echo "Directory created: ${bindir}"
+    else
+      echo "Could not create ${bindir}"
+      exit 1
+    fi
+  fi
+  exit 0
+else
+  echo "Err: You must provide the script file name"
+  exit 1
+fi

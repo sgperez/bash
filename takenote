@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# Simple Take Note
+# Author: Sebastian
+
+date=$(date)
+
+#get topic
+topic="$1"
+
+filename="${HOME}/shellScript/${topic}notes.txt"
+
+#ask user to enter note
+read -p "Please enter note: " note
+
+if [[ $note ]]; then
+  echo "$date: $note" >> "$filename"
+  echo "Note '$note' saved to $filename"
+else
+  echo "No input"
+fi
