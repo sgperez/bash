@@ -12,30 +12,28 @@ if [[ $1 ]]; then
     exit 1
   fi
 
-  if ! type "$scriptname"; then
-    if [[ ! -d $bindir ]]; then
-      #directory does not exists
-      if mkdir "$bindir"; then
-        echo "Directory created: ${bindir}"
-      else
-        echo "Could not create ${bindir}"
-        exit 1
-      fi
-    fi
-
-    #Create script file
-    echo "#!/bin/bash" > "$filename"
-    chmod u+x "$filename"
-
-    echo "File created sucessfully"
-
-    exit 0
-  
-  else
+  if type "$scriptname"; then
     echo "There is already a command named $scriptname"
     exit 1
   fi
 
+  if [[ ! -d $bindir ]]; then
+    #directory does not exists
+    if mkdir "$bindir"; then
+      echo "Directory created: ${bindir}"
+    else
+      echo "Could not create ${bindir}"
+      exit 1
+    fi
+  fi
+
+  #Create script file
+  echo "#!/bin/bash" > "$filename"
+  chmod u+x "$filename"
+
+  echo "File created sucessfully"
+
+  exit 0
 else
   echo "Err: You must provide the script file name"
   exit 1
